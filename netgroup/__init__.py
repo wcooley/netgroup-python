@@ -1,12 +1,12 @@
 """Interface to netgroup functions, which are available on most Unix systems.
 
-From the Linux man page v3.23 for setnetgrent(3):
+From the Linux man page v3.23 for *netgrent(3):
 
-    The  netgroup  is  a  SunOS  invention.   A  netgroup database is a list
-    of string triples (hostname, username, domainname) or other netgroup names.
-    Any of the elements in a triple can be empty, which means  that  anything
-    matches.   The  functions  described  here allow access to the netgroup
-    databases.  The file /etc/nsswitch.conf defines what database is searched.
+    The netgroup is a SunOS invention. A netgroup database is a list of string
+    triples (hostname, username, domainname) or other netgroup names.  Any of
+    the elements in a triple can be empty, which means that anything matches.
+    The functions described here allow access to the netgroup databases. The
+    file /etc/nsswitch.conf defines what database is searched.
 
 There are several implementations of this available on the net, but this one
 uses ctypes and hence requires no C compilation. It does, however, only work on
@@ -40,7 +40,7 @@ def getgroup(name):
     '''
     host,user,domain = c_char_p(None),c_char_p(None),c_char_p(None)
 
-    libc=CDLL(libc_name)
+    libc = CDLL(libc_name)
 
     libc.setnetgrent(name)
 
@@ -60,5 +60,5 @@ def innetgr(netgroup,host=None,user=None,domain=None):
     Ask whether a host/user/domain tuple is part of a netgroup
     If no host,user or domain is passed then it returns true if the netgroup exists
     '''
-    libc=CDLL(libc_name)
+    libc = CDLL(libc_name)
     return bool(libc.innetgr(netgroup,host,user,domain))
