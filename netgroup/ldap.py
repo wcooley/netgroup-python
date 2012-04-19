@@ -7,6 +7,6 @@ def find(ldapobj, host='*', user='*', domain='*'):
     matches any value. Requires an object like ldap.LDAPObject (or a partial
     function with base and scope populated)."""
 
-    filter = '(&(objectclass=nisNetgroup)(netNetgroupTriple=(%s,%s,%s)' % \
+    filter = '(&(objectclass=nisNetgroup)(netNetgroupTriple=\(%s,%s,%s\)))' % \
             (host, user, domain)
-#    ldapobj.search(
+    return ldapobj.search(filter)
