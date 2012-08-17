@@ -20,17 +20,14 @@ http://planetjoel.com/viewarticle/629/Python+NSS+netgroups+interface
 
 from ctypes import CDLL,c_char_p
 from ctypes import byref as _byref
+from ctypes.util import find_library
 
 import sys
 
-if sys.platform.startswith('linux'):
-    _libc_name = 'libc.so.6'
-elif sys.platform == 'sunos5':
-    _libc_name = 'libc.so'
-elif sys.platform == 'darwin':
-    _libc_name = 'libc.dylib'
-else:
-    raise NotImplementedError, 'Unsupported platform: ' + sys.platform
+_libc_name = find_library('c')
+
+if not _libc_name:
+    raise NotImplementedError, 'Unable to locate libc for platform ' + sys.platform
 
 def getgroup(name):
     '''
