@@ -1,4 +1,4 @@
 
-from common import getgroup, innetgr
+from .common import getgroup, innetgr
 
 __all__ = ['common']
