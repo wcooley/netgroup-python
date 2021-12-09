@@ -27,7 +27,7 @@ import sys
 _libc_name = find_library('c')
 
 if not _libc_name:
-    raise NotImplementedError, 'Unable to locate libc for platform ' + sys.platform
+    raise NotImplementedError('Unable to locate libc for platform ' + sys.platform)
 
 def getgroup(name):
     '''
